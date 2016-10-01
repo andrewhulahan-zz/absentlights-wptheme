@@ -1,0 +1,818 @@
+@import 'octicons/octicons';
+
+/***** COLORS *****/
+$white: #fff;
+$maindark: #23282d;
+$maindarker: #1e2328;
+$maindarkest: #12171c;
+$mainmed: #53585d;
+$mainlight: #c3c8cd;
+$mainlighter: #d3d8dd;
+$mainlightest: #e3e8ed;
+/***** END COLORS *****/
+
+@mixin rgba-background($hexcolor, $opacity) {
+  background-color: $hexcolor;
+  background-color: rgba($hexcolor, $opacity); 
+}
+
+/***** FONTFACES *****/
+@font-face {
+  font-family: 'archiveregular';
+  src: url('archive-wf/archive-webfont.eot');
+  src: url('archive-wf/archive-webfont.eot?#iefix') format("embedded-opentype"), url('archive-wf/archive-webfont.woff2') format("woff2"), url('archive-wf/archive-webfont.woff') format("woff"), url('archive-wf/archive-webfont.ttf') format("truetype"), url('archive-wf/archive-webfont.svg#archiveregular') format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Octicons";
+  src: url("octicons/octicons.eot?ef21c39f0ca9b1b5116e5eb7ac5eabe6");
+  src: url("octicons/octicons.eot?#iefix") format("embedded-opentype"), url("octicons/octicons.woff2?ef21c39f0ca9b1b5116e5eb7ac5eabe6") format("woff2"), url("octicons/octicons.woff?ef21c39f0ca9b1b5116e5eb7ac5eabe6") format("woff"), url("octicons/octicons.ttf?ef21c39f0ca9b1b5116e5eb7ac5eabe6") format("truetype"), url("octicons/octicons.svg?ef21c39f0ca9b1b5116e5eb7ac5eabe6#octicons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/***** END FONTFACES *****/
+
+#wpadminbar {
+  position: fixed !important;
+}
+html,body,div#content {
+  margin: 0;
+}
+
+/***** GENERIC *****/
+html {
+  font-size: 14px;
+}
+
+body {
+  background-color: white;
+  font-family: 'archiveregular', serif;
+  font-weight: normal;
+  line-height: 1.45;
+  color: $maindarker;
+}
+
+p {
+  margin-bottom: 1.3em;
+}
+
+h1, h2, h3, h4 {
+  margin: 1.414em 0 0.5em;
+  font-weight: inherit;
+  line-height: 1.2;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 2.441em;
+  &.page-entry-title {
+    margin-top: 1em;
+  }
+}
+
+h2 {
+  font-size: 1.953em;
+}
+
+h3 {
+  font-size: 1.563em;
+}
+
+h4 {
+  font-size: 1.25em;
+}
+
+small, .font_small {
+  font-size: 0.8em;
+}
+
+hr, pre {
+  margin-bottom: 1.5em;
+}
+
+hr {
+  background-color: #999999;
+  border: 0;
+  height: 1px;
+}
+
+pre {
+  overflow: scroll;
+}
+
+code, pre {
+  font: 1em Consolas,Monaco,monospace;
+}
+
+table {
+  width: 100%;
+  thead {
+    th,tr {
+      background: $mainlight;
+    }
+  }
+  th,tr {
+    font-weight: normal;
+    background: $mainlighter;
+  }
+}
+
+blockquote {
+  &:before {
+    position: absolute;
+    display: inline-block;
+
+    font: normal normal normal 16px/1 Octicons;
+    text-decoration: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 32px;
+
+    content: "\f063\00a0";
+    color: $mainmed;
+  }
+  p {
+    position: relative;
+  }
+}
+/***** END GENERIC *****/
+
+.sticky .entry-content .post-title-meta .entry-title:before {
+    font: normal normal normal 16px/1 Octicons;
+    display: inline-block;
+    text-decoration: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    content: "\f041\00a0";
+}
+
+a:hover {
+  color: #0db;
+}
+
+.hamburger:hover, .logo a:hover {
+  color: #f35;
+}
+
+a {
+  color: #f35;
+  &:visited {
+    color: #f35;
+  }
+}
+
+div#content {
+  padding-top: 86px;
+}
+
+#navbar, .menu-header {
+  position: fixed;
+  width: 100%;
+}
+
+#navbar {
+  height: 86px;
+  margin: 0;
+  padding: 0;
+  background: $maindark;
+  z-index: 8;
+  input[type=checkbox] {
+    width: 86px;
+    height: 86px;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    opacity: 0;
+    cursor: pointer;
+    &:hover {
+      & ~ .hamburger {
+        color: #f35;
+      }
+    }
+    &:checked {
+      & ~ .hamburger {
+        color: #f35;
+      }
+      & ~ .menu-header {
+        left: 0;
+        transition: left 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+      }
+    }
+  }
+}
+
+.menu-header {
+  z-index: 6;
+  overflow: hidden;
+  min-height: 100%;
+  background: $maindarkest;
+  margin-top: 86px;
+  left: -100%;
+  transition: left 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  ul {
+    &.menu {
+      position: absolute;
+      margin: 5% 0 0 0;
+      padding: 0 20px 0 0;
+      height: 82%;
+      width: 100%;
+      overflow-y: scroll;
+    }
+    li {
+      a {
+        display: inline-block;
+        text-decoration: none;
+        height: 100%;
+        padding: 0.8em 0;
+        font-size: 2em;
+        color: #f35;
+        transition: color .2s ease;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.hamburger, .logo a {
+  position: fixed;
+  cursor: pointer;
+  transition: color .2s;
+}
+
+.hamburger {
+  border-right: 1px solid #20252a;
+  background: $maindark;
+  z-index: 7;
+  padding: 27px 30.5px;
+  color: $white;
+}
+
+.logo {
+  a {
+    z-index: 9;
+    left: 50%;
+    margin-left: -43px;
+    padding: 23px;
+    color: $maindark;
+    background: $white;
+    background-clip: content-box;
+    height: 40px;
+    width: 40px;
+    svg g {
+      fill: currentColor;
+    }
+  }
+  > a > svg {
+    margin-top: -19px;
+    margin-left: -19px;
+  }
+}
+
+.post {
+  position: relative;
+  float: left;
+  width: 100%;
+  padding-bottom: 100%;
+  overflow: hidden;
+  .entry-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+  .post-title-meta {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    padding: 25%;
+    font-size: .9em;
+    opacity: 0;
+    color: $white;
+    transition: opacity .2s,background .2s;
+    z-index: 3;
+    word-wrap: break-word;
+    .post-link {
+      z-index: 1;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+    &:hover {
+      opacity: 1;
+      background: #f35;
+      ~ .entry-bg-top {
+        -webkit-filter: blur(2px);
+        -moz-filter: blur(2px);
+        -ms-filter: blur(2px);
+        -o-filter: blur(2px);
+        filter: blur(2px);
+      }
+    }
+    a {
+      color: $white;
+    }
+  }
+  .content-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translate(-25%,50%) rotate(45deg) scale(2.5);
+    filter: blur(1px);
+    background: #f35;
+    color: #fff;
+  }
+}
+
+.entry-bg-bottom {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+}
+
+.entry-bg-top {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  -webkit-filter: none;
+  -moz-filter: none;
+  -ms-filter: none;
+  -o-filter: none;
+  filter: none;
+  transition: -webkit-filter .1s;
+  z-index: 2;
+}
+
+.entry-bg-bottom {
+  z-index: 1;
+}
+
+.menu {
+  ul {
+    list-style: none;
+    margin: 0;
+    ul {
+      display: none;
+    }
+  }
+  li {
+    display: block;
+    text-align: center;
+    padding: 0 8px 0 4px;
+  }
+}
+
+#nav-below a {
+  display: inline-block;
+  text-decoration: none;
+  height: 100%;
+}
+
+.menu-item a {
+  display: inline-block;
+  text-decoration: none;
+  height: 100%;
+  padding: 30px 0;
+  font-size: 30px;
+  color: #f35;
+  transition: color .2s;
+  width: 100%;
+  &:hover {
+    color: #0db;
+  }
+}
+
+.kazoo-vid {
+  height: 700px;
+  width: 100%;
+}
+
+.alignright {
+  padding: 8px 0 8px 8px;
+  float: right;
+}
+
+.alignleft {
+  padding: 8px 8px 8px 0;
+  float: left;
+}
+
+span.edit-link {
+  position: relative;
+  z-index: 10;
+  bottom: 0;
+  right: 0;
+}
+
+#nav-below, div#footer {
+  position: relative;
+  width: 100%;
+}
+
+#nav-below {
+  height: 100%;
+  a {
+    position: fixed;
+    width: 188px;
+    top: 0;
+    z-index: 4;
+    background: rgba(18, 23, 28, 0);
+    color: rgba(255, 51, 85, 0.5);
+    &.next-post {
+      right: -136px;
+      transition: color 0.2s cubic-bezier(0.075, 0.82, 0.165, 1), right 0.3s cubic-bezier(0.075, 0.82, 0.165, 1), background 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+      &:hover {
+        right: 0;
+        color: #f35;
+        background: $maindarkest;
+      }
+    }
+    &.prev-post {
+      left: -136px;
+      transition: color 0.2s cubic-bezier(0.075, 0.82, 0.165, 1), left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1), background 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+      &:hover {
+        left: 0;
+        color: #f35;
+        background: $maindarkest;
+      }
+    }
+    span {
+      position: absolute;
+      padding: 0 20px;
+      top: 50%;
+      max-width: 96px;
+      &.nav-text {
+        margin-top: 59px;
+        word-wrap: break-word;
+      }
+      &.prev-post {
+        margin-top: 59px;
+        left: 0;
+      }
+      &.next-post {
+        margin-top: 59px;
+        right: 0;
+        text-align: right;
+      }
+      &.mega-octicon {
+        margin-top: 54px;
+      }
+      &.octicon-triangle-left {
+        right: 0;
+        padding-right: 5px;
+      }
+      &.octicon-triangle-right {
+        left: 0;
+      }
+    }
+  }
+}
+
+.comments img {
+  float: left;
+  margin: 0 12px 8px 0;
+}
+
+div {
+  &#footer {
+    float: left;
+    padding-bottom: 100%;
+    background: #334;
+  }
+  &#colophon {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    padding: 10% 0;
+    right: 0;
+    top: 0;
+  }
+  .alignnone {
+    max-width: 100%;
+  }
+  .aligncenter {
+    margin: 0 auto;
+  }
+}
+
+span.copyright {
+  position: absolute;
+  display: block;
+}
+
+span.copyright {
+  text-align: center;
+  color: $white;
+  bottom: 0;
+  width: 100%;
+}
+
+div {
+  &#page-container {
+    margin: 0;
+  }
+  &#page-content {
+    padding: 86px 0 0;
+    position: relative;
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+}
+
+#page-content .post {
+  position: absolute;
+  width: 100%;
+  padding-bottom: 50px;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.entry-utility {
+  font-size: .7em;
+}
+
+/***** COMMISSION PAGE CSS *****/
+h2 {
+  &.commission-status, &.contact-email {
+    text-align: center;
+    padding: 2em;
+    margin: 0;
+  }
+  &.commission-status {
+    &.open {
+      background-color: #bd4;
+    }
+    &.closed {
+      background-color: #f33;
+    }
+  }
+  &.contact-email {
+    color: $white;
+    background: $maindark;
+    a {
+      color: $white;
+      text-decoration: none;
+    }
+  }
+}
+.comm-sample-group {
+  .comm-header {
+    padding: 1em;
+    margin: 0;
+    border-left: 10px solid #f35;
+    color: $white;
+  }
+  p {
+    border-left: 10px solid #f35;
+    margin: 0;
+    padding: 1em;
+  }
+  h3 {
+    &.comm-header {
+      background: #f35;
+    }
+  }
+  h4 {
+    &.comm-header {
+      background: $maindark;
+    }
+  }    
+  .comm-sample-row {
+    .comm-sample-container {
+      float: left;
+      width: 25%;
+      padding-bottom: 25%;
+      position: relative;
+      overflow: hidden;
+      img {
+        height: 256px;
+        width: 256px;
+        top: 50%;
+        left: 50%;
+        margin-left: -128px;
+        margin-top: -128px;
+        position: absolute;
+      }
+      &:first-of-type {
+        border-left: 10px solid #f35;
+        box-sizing: border-box;
+      }
+      & .alignnone {
+        max-width: none;
+      }
+    }
+  }
+}
+blockquote {
+  background: $maindark;
+  color: $white;
+  margin: 0;
+  padding: 1em 1em 0.5em 1em;
+  & + p {
+    background: $mainlighter;
+    margin: 0;
+    padding: 0.5em;
+    & + p {
+      background: $mainlighter;
+      margin: 0;
+      padding: 0.5em;
+      & + p {
+        background: $mainlighter;
+        margin: 0;
+        padding: 0.5em;
+      }
+    }
+  }
+}
+/***** END COMMISSION PAGE CSS *****/
+
+/***** LEMON LIGHTBOX CSS *****/
+.lemonlightbox {
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  cursor: pointer;
+  &.visible {
+    visibility: visible;
+    @include rgba-background($maindark,0.8);
+  }
+  &.hidden {
+    visibility: hidden;
+  }
+}
+
+.lemonwrapper {
+  position: absolute;
+  display: inline-block;
+  text-align: center;
+  max-height: 80%;
+  top: 50%;
+  margin-top: -25%;
+  left: 50%;
+}
+
+img.lemonimg {
+  max-width: 1024px;
+  max-height: 1024px;
+}
+
+.lemon-x {
+  color: $white;
+  position: absolute;
+  bottom: -32px;
+  right: 0;
+  transition: color 0.2s;
+  cursor: pointer;
+  &:hover {
+    color: #0db;
+  }
+}
+
+.lemon-link {
+  color: $white;
+  position: absolute;
+  bottom: -32px;
+  right: 32px;
+  transition: color 0.2s;
+  cursor: pointer;
+  &:visited {
+    color: $white;
+  }
+  &:hover {
+    color: #0db;
+  }
+}
+/***** END LEMON LIGHTBOX CSS *****/
+
+@media screen and (min-width: 1444px) {
+  .post, div#footer {
+    width: 25%;
+    padding-bottom: 25%;
+  }
+  .menu-header {
+    width: 27%;
+    margin-left: -2%;
+    left: -25%;
+    box-shadow: 0 0 10px #01060b inset;
+    z-index: 6;
+    ul {
+      li {
+        text-align: left;
+        a {
+          text-indent: 70px;
+        }
+      }
+    }
+  }
+  div#content {
+    padding-top: 86px;
+  }
+  div {
+    &#footer {
+      width: 100%;
+    }
+    &#colophon {
+      width: 25%;
+      padding: 2.5% 0;
+    }
+    &#page-content {
+      padding: 86px 0 0;
+    }
+  }
+  #nav-below a {
+    background: rgba(18, 23, 28, 0.5);
+  }
+}
+
+@media screen and (max-width: 1443px) and (min-width: 968px) {
+  .post, div#footer {
+    width: 33.33%;
+    padding-bottom: 33.33%;
+  }
+  .menu-header {
+    width: 35.33%;
+    margin-left: -2%;
+    left: -33.33%;
+    box-shadow: 0 0 10px #01060b inset;
+    z-index: 6;
+    ul {
+      li {
+        text-align: left;
+        a {
+          text-indent: 70px;
+        }
+      }
+    }
+  }
+  div#content {
+    padding-top: 86px;
+  }
+  div {
+    &#colophon {
+      width: 33.33%;
+      padding: 3.333% 0;
+    }
+    &#page-content {
+      padding: 86px 0 0;
+      max-width: 900px;
+    }
+  }
+  #nav-below a {
+    background: rgba(18, 23, 28, 0.5);
+  }
+}
+
+@media screen and (max-width: 967px) and (min-width: 642px) {
+  .post, div#footer {
+    width: 50%;
+    padding-bottom: 50%;
+  }
+  .menu-header {
+    width: 52%;
+    margin-left: -2%;
+    left: -50%;
+    box-shadow: 0 0 10px #01060b inset;
+    z-index: 6;
+    ul li {
+      text-align: left;
+      a {
+        text-indent: 70px;
+      }
+    }
+  }
+  div {
+    &#colophon {
+      width: 50%;
+      padding: 5% 0;
+    }
+    &#page-content {
+      padding: 86px 0 0;
+      max-width: 600px;
+    }
+  }
+  #nav-below a {
+    background: rgba(18, 23, 28, 0.5);
+  }
+}

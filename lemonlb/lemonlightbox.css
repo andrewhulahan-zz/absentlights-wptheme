@@ -1,0 +1,53 @@
+.lemonlightbox {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+}
+.lemonlightbox.visible {
+    visibility: visible;
+}
+.lemonlightbox.hidden {
+    visibility: hidden;
+}
+.lemonwrapper {
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    max-height: 80%;
+    top: 50%;
+    margin-top: -25%;
+    left: 50%;
+}
+img.lemonimg {
+    max-width: 1024px;
+    max-height: 1024px;
+}
+.lemon-x {
+    color: #000;
+    position: absolute;
+    bottom: -32px;
+    right: 0;
+    transition: color 0.2s;
+    cursor: pointer;
+}
+.lemon-x:hover {
+    color: #0db;
+}
+.lemon-link {
+    color: #000;
+    position: absolute;
+    bottom: -32px;
+    right: 32px;
+    transition: color 0.2s;
+    cursor: pointer;
+}
+.lemon-link:visited {
+    color: #000;
+}
+.lemon-link:hover {
+    color: #0db;
+}
